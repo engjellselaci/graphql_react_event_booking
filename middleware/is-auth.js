@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     req.isAuth = false;
     return next();
   }
-  const token = authHeader.split(" ")[1]; //Authorization: Bearer
+  const token = authHeader.split(" ")[1];
   if (!token || token === "") {
     req.isAuth = false;
     return next();
@@ -20,9 +20,9 @@ module.exports = (req, res, next) => {
   }
   if (!decodedToken) {
     req.isAuth = false;
-    return true;
+    return next();
   }
   req.isAuth = true;
-  req.UserId = decodedToken.userId;
+  req.userId = decodedToken.userId;
   next();
 };
